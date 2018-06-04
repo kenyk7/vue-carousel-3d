@@ -73,13 +73,14 @@
             calculatePosition (i, positive, zIndex) {
                 const z = !this.parent.disable3d ? parseInt(this.parent.inverseScaling) + ((i + 1) * 100) : 0
                 const y = !this.parent.disable3d ? parseInt(this.parent.perspective) : 0
+                const ty = this.parent.horizonOffset * (i + 1)
                 const leftRemain = (this.parent.space === 'auto')
                     ? parseInt((i + 1) * (this.parent.width / 1.5), 10)
                     : parseInt((i + 1) * (this.parent.space), 10)
                 const transform = (positive)
-                    ? 'translateX(' + (leftRemain) + 'px) translateZ(-' + z + 'px) ' +
+                    ? 'translateX(' + (leftRemain) + 'px) translateY(' + ty + 'px) translateZ(-' + z + 'px) ' +
                     'rotateY(-' + y + 'deg)'
-                    : 'translateX(-' + (leftRemain) + 'px) translateZ(-' + z + 'px) ' +
+                    : 'translateX(-' + (leftRemain) + 'px) translateY(' + ty + 'px) translateZ(-' + z + 'px) ' +
                     'rotateY(' + y + 'deg)'
                 const top = this.parent.space === 'auto' ? 0 : parseInt((i + 1) * (this.parent.space))
 

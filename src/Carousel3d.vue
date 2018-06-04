@@ -1,6 +1,7 @@
 <template>
-	<div class="carousel-3d-container" :style="{height: this.slideHeight + 'px'}">
-		<div class="carousel-3d-slider" :style="{width: this.slideWidth + 'px', height: this.slideHeight + 'px'}">
+	<div class="carousel-3d-container" :style="{height: horizonOffset === 0 ? this.slideHeight + 'px' : 'auto'}">
+		<div class="carousel-3d-slider"
+        :style="{width: this.slideWidth + 'px', height: this.slideHeight + 'px', margin: calculateMarginContainer}">
 			<slot></slot>
 		</div>
 		<controls v-if="controlsVisible" :next-html="controlsNextHtml" :prev-html="controlsPrevHtml"
@@ -118,6 +119,10 @@
             onMainSlideClick: {
                 type: Function,
                 default: noop
+            },
+            horizonOffset: {
+                type: Number,
+                default: 0
             }
         },
         data () {
@@ -141,6 +146,12 @@
             }
         },
         computed: {
+            calculateMarginContainer () {
+                if (this.horizonOffset < 0) {
+                    return Math.abs(this.horizonOffset) * 1.5 + 'px auto 0'
+                }
+                return '0 auto ' + Math.abs(this.horizonOffset) * 1.5 + 'px'
+            },
             isLastSlide () {
                 return this.currentIndex === this.total - 1
             },

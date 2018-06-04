@@ -95,6 +95,23 @@ play('Carousel3d', module)
         }
     })
 
+    .add("with horizon", {
+        template: `<carousel-3d :perspective="0" :inverseScaling="0" :horizonOffset="-45">
+            <slide v-for="(slide, i) in slides" :index="i">
+                <img :src="slide.src">
+            </slide>
+        </carousel-3d>`,
+        components: {
+            Carousel3d,
+            Slide
+        },
+        data() {
+            return {
+                slides: slides
+            }
+        }
+    })
+
     .add("autoplay enabled", {
         template: `<carousel-3d :autoplay="true">
             <slide v-for="(slide, i) in slides" :index="i">
@@ -198,7 +215,7 @@ play('Carousel3d', module)
     })
 
     .add("custom controls", {
-        template: `<carousel-3d :controls-visible="true" :controls-prev-html="'&#10092;'" :controls-next-html="'&#10093;'" 
+        template: `<carousel-3d :controls-visible="true" :controls-prev-html="'&#10092;'" :controls-next-html="'&#10093;'"
                                 :controls-width="30" :controls-height="60">
             <slide v-for="(slide, i) in slides" :index="i">
                 <img :src="slide.src">
